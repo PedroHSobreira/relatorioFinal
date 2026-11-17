@@ -207,6 +207,30 @@ print(
 )
 print("========================================")
 
+# ============================================================
+# 5.1 SIMULACAO DE INTERRUPCAO DE TRANSFERENCIAS
+# ============================================================
+
+G_simulacao = G.copy()
+
+conexoes_removidas = [
+    ("L1|Santa Cruz", "L5|Santa Cruz"),
+    ("L2|Chacara Klabin", "L5|Chacara Klabin")
+]
+
+G_simulacao.remove_edges_from(conexoes_removidas)
+
+componentes_simulacao = list(
+    nx.connected_components(G_simulacao)
+)
+
+print("\n--- SIMULACAO DE INTERRUPCAO ---")
+print("Componentes antes:", nx.number_connected_components(G))
+print("Componentes depois:", len(componentes_simulacao))
+
+for i, componente in enumerate(componentes_simulacao, 1):
+    print(f"Componente {i}: {len(componente)} vertices")
+
 
 # ============================================================
 # 6. BUSCAS BFS E DFS
